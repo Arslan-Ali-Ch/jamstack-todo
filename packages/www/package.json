@@ -1,0 +1,22 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "alpha",
+  "scripts": {
+    "develop": "gatsbt develop",
+    "build": "gatsby build",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@mdx-js/react": "^2.1.2",
+    "@theme-ui/presets": "^0.14.6",
+    "gatsby": "^4.18.0",
+    "netlify-identity-widget": "^1.9.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "theme-ui": "^0.14.6"
+  }
+}
