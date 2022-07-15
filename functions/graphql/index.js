@@ -2,16 +2,16 @@ const { ApolloServer, gql } = require('apollo-server-lambda')
 
 const typeDefs = gql`
   type Query {
-    todos:[Todo]!
+    todos:[Todo]
    }
    type Todo{
-    id:ID!
-    text:String!
-    done:Boolean!
+    id: ID!
+    text: String!
+    done: Boolean!
    }
    type Mutation {
-    addTodo(text!):Todo
-    updateTodoDone(id:ID!):Todo
+    addTodo(text: String!): Todo
+    updateTodoDone(id: ID!): Todo
    }
   `;
   const todos={};
