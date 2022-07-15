@@ -13,15 +13,23 @@ const resolvers = {
   },
 }
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  playground:true,
-  introspection:true,
-})
 
-const handler = server.createHandler()
 
- module.exports = { handler }
+ const getHandler = (event, context) => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    playground:true,
+    introspection:true,
+  });
+  const graphqlHandler = server.createHandler();
+  if (!event.requestContext) {
+      event.requestContext = context;
+  }
+  return graphqlHandler(event, context);
+}
+
+exports.handler = getHandler;
+
 
 
