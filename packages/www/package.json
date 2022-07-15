@@ -10,6 +10,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@emotion/react": "^11.9.3",
     "@mdx-js/react": "^2.1.2",
     "@theme-ui/presets": "^0.14.6",

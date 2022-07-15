@@ -49,7 +49,12 @@ const resolvers = {
     playground:true,
     introspection:true,
   });
-  const graphqlHandler = server.createHandler();
+  const graphqlHandler = server.createHandler({
+    cors:{
+      origin:"*",
+      credentials:true
+    }
+  });
   if (!event.requestContext) {
       event.requestContext = context;
   }
