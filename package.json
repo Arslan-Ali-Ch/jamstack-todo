@@ -1,10 +1,11 @@
 {
-  "name": "gatsby-todo-app",
+  "name": "todoapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "author": "alpha",
   "private": "true",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":"netlify-lambda serve functions",
@@ -13,10 +14,5 @@
   "keywords": [],
   "workspaces": [
     "packages/*"
-  ],
-  "license": "ISC",
-  "dependencies": {
-    "apollo-server-lambda": "^2.25.4",
-    "graphql": "^14.7.0"
-  }
+  ]
 }

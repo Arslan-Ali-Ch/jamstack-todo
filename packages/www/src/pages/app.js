@@ -1,13 +1,12 @@
-import React, { useContext, useReducer, useRef, useState } from 'react'
+import React, { useContext,  useRef} from 'react'
 import {Router,Link} from "@reach/router";
-import netlifyIdentity from "netlify-identity-widget"
 import { IdentityContext } from "../../identity-context";
 import {gql,useMutation,useQuery} from "@apollo/client";
 import { 
     Container,
     Flex,
     NavLink,
-    Button,Heading,
+    Button,
     Input,Label, Checkbox
 } from 'theme-ui';
 
@@ -39,23 +38,23 @@ query GetTodos{
 `;
 
 
-const todosReducer=(state,action)=>{
-    switch(action.type){
-        case "addTodo":
-            return [{done:false,value:action.payload},...state]
-        case "toggleTodo":
-            const newState=[...state];
-            newState[action.payload]={
-                done:!state[action.payload].done,
-                value:state[action.payload].value
-            }
-            return newState;
-        }
-}
+// const todosReducer=(state,action)=>{
+//     switch(action.type){
+//         case "addTodo":
+//             return [{done:false,value:action.payload},...state]
+//         case "toggleTodo":
+//             const newState=[...state];
+//             newState[action.payload]={
+//                 done:!state[action.payload].done,
+//                 value:state[action.payload].value
+//             }
+//             return newState;
+//         }
+// }
 const Dash=()=>{
     const { user,netlifyIdentity }=useContext(IdentityContext);
     const inputRef=useRef();
-    const [todos,dispatch]=useReducer(todosReducer,[]);
+   // const [todos,dispatch]=useReducer(todosReducer,[]);
    const [addTodo]=useMutation(ADD_TODO);
    const [updateTodoDone]=useMutation(UPDATE_TODO_DONE);
    const {loading,error,data,refetch}=useQuery(GET_TODOS)
