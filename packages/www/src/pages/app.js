@@ -19,7 +19,7 @@ mutation AddTodo($text: String!){
 }
 `;
 const UPDATE_TODO_DONE=gql`
-mutation ($id: ID!){
+mutation UpdateTodoDone($id: ID!){
     updateTodoDone(id: $id){
         text
         done

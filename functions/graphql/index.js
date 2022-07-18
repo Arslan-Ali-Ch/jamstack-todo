@@ -19,6 +19,7 @@ var todoIndex=0;
 const resolvers = {
   Query: {
     todos:(parent,args,{user})=>{
+      console.log('i am user',user);
       if(!user){
         return [];
       }
