@@ -11,30 +11,31 @@ import {
 } from 'theme-ui';
 
 const ADD_TODO=gql`
-mutation AddTodo($type:String!){
-    addTodo(text:"one todo"){
+mutation AddTodo($text: String!){
+    addTodo(text: $text){
         id
+      
     }
 }
 `;
 const UPDATE_TODO_DONE=gql`
-mutation UdateTodoDone($id:ID!){
-    updateTodoDone(id:$id){
+mutation ($id: ID!){
+    updateTodoDone(id: $id){
         text
         done
-    }
+    } 
 }
 `;
 
 
 const GET_TODOS=gql`
-query GetTodos{
-    todos{
-        id
-        text
-        done
+query  {
+    todos {
+      id
+      text
+      done
     }
-}
+  }
 `;
 
 
@@ -57,9 +58,12 @@ const Dash=()=>{
    // const [todos,dispatch]=useReducer(todosReducer,[]);
    const [addTodo]=useMutation(ADD_TODO);
    const [updateTodoDone]=useMutation(UPDATE_TODO_DONE);
-   const {loading,error,data,refetch}=useQuery(GET_TODOS)
+   const {loading,error,data,refetch}=useQuery(GET_TODOS);
+   
+   
     return(
     <Container>
+        
         <Flex as="nav">
             <NavLink as={Link} to="/" p={2}>
                 Home
@@ -97,7 +101,7 @@ const Dash=()=>{
             {loading ? <div>loading...</div>:null}
             {error ?<div>{error.message}</div>:null}
           {
-            !loading && !error &&(
+            !loading && !error  &&(
                 <ul sx={{listStyleType:'none'}}>
                 {data.todos.map((todo)=>(
                     <Flex key={todo.id} as="li" onClick={async()=>{
@@ -105,7 +109,7 @@ const Dash=()=>{
                         await refetch();
                     }}>
                         <Checkbox onChange={()=>{}} checked={todo.done}/>
-                        <span>{todo.value}</span>
+                        <span>{todo.text}</span>
                     </Flex>
                 ))}
             </ul>

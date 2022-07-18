@@ -18,8 +18,14 @@ const typeDefs = gql`
 var todoIndex=0;
 const resolvers = {
   Query: {
-    todos:()=>{
-      return Object.values(todos);
+    todos:(parent,args,{user})=>{
+      if(!user){
+        return [];
+      }
+      else{
+        return Object.values(todos);
+    
+      }
     }  
   
   },
@@ -46,6 +52,15 @@ const resolvers = {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context:({context})=>{
+      if(context.clientContext.user){
+        return {user:context.clientContext.user.sub};
+    
+      }
+      else {
+        return {};
+      }
+    },
     playground:true,
     introspection:true,
   });
