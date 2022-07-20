@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "alpha",
   "scripts": {
-    "develop": "gatsbt develop",
+    "develop": "gatsby develop",
     "build": "gatsby build",
     "clean": "gatsby clean"
   },

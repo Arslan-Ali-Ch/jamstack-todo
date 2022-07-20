@@ -19,8 +19,7 @@ const typeDefs = gql`
     updateTodoDone(id: ID!,done: Boolean): Todo
    }
   `;
-  const todos={};
-var setDone=false;
+ 
 const resolvers = {
   Query: {
     todos:async (parent,args,{user})=>{
@@ -30,7 +29,7 @@ const resolvers = {
       // }
       
         const results= await client.query(
-          q.Paginate(q.Match(q.Index("todos_by_user"),user))
+          q.Paginate(q.Match(q.Index("todos_by_user"),"test"))
         );
         return results.data.map(([ref,text,done])=>({
           id:ref.id,
@@ -52,7 +51,7 @@ const resolvers = {
           data:{
             text,
             done:setDone,
-            owner:user
+            owner:"test"
           }
         })
       );
