@@ -19,10 +19,10 @@ mutation AddTodo($text: String!){
 }
 `;
 const UPDATE_TODO_DONE=gql`
-mutation UpdateTodoDone($id: ID!){
-    updateTodoDone(id: $id){
+mutation UpdateTodoDone($id: ID!,$done:Boolean){
+    updateTodoDone(id: $id,done:$done){
         text
-        done
+        
     } 
 }
 `;
@@ -53,7 +53,7 @@ query  {
 //         }
 // }
 const Dash=()=>{
-    const { user,netlifyIdentity }=useContext(IdentityContext);
+    const { user,netlifyIdentity,done,setDone }=useContext(IdentityContext);
     const inputRef=useRef();
    // const [todos,dispatch]=useReducer(todosReducer,[]);
    const [addTodo]=useMutation(ADD_TODO);
@@ -105,8 +105,9 @@ const Dash=()=>{
                 <ul sx={{listStyleType:'none'}}>
                 {data.todos.map((todo)=>(
                     <Flex key={todo.id} as="li" onClick={async()=>{
-                       await updateTodoDone({variables:{id:todo.id}})
+                       await updateTodoDone({variables:{id:todo.id,done:done}})
                         await refetch();
+                        setDone((prev)=>!prev);
                     }}>
                         <Checkbox onChange={()=>{}} checked={todo.done}/>
                         <span>{todo.text}</span>
