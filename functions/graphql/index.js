@@ -24,18 +24,19 @@ const resolvers = {
   Query: {
     todos:async (parent,args,{user})=>{
       console.log('i am user',user);
-      // if(!user){
-      //   return [];
-      // }
-      
-        const results= await client.query(
-          q.Paginate(q.Match(q.Index("todos_by_user"),"test"))
-        );
-        return results.data.map(([ref,text,done])=>({
-          id:ref.id,
-          text,
-          done
-        }));
+      if(!user){
+        return [];
+      }
+        else{
+          const results= await client.query(
+            q.Paginate(q.Match(q.Index("todos_by_user"),user))
+          );
+          return results.data.map(([ref,text,done])=>({
+            id:ref.id,
+            text,
+            done
+          }));
+        }
     
       
     }  
@@ -43,15 +44,15 @@ const resolvers = {
   },
   Mutation:{
     addTodo:async (_,{text},{user})=>{
-      // if(!user){
-      //   throw new Error("Must be authenticated");
-      // }
+      if(!user){
+        throw new Error("Must be authenticated");
+      }
       const results=await client.query(
         q.Create(q.Collection("todos"),{
           data:{
             text,
-            done:setDone,
-            owner:"test"
+            done:false,
+            owner:user
           }
         })
       );
@@ -62,12 +63,12 @@ const resolvers = {
 
     },
 
-  updateTodoDone:async(_,{id},{done})=>{
+  updateTodoDone:async(_,{id},{user},{done})=>{
     
  
-    // if(!user){
-    //   throw new Error("Must be authenticated");
-    // }
+    if(!user){
+      throw new Error("Must be authenticated");
+    }
     const results=await client.query(
       q.Update(q.Ref(q.Collection("todos"),id),{
         data:{done:!done
@@ -90,15 +91,15 @@ const resolvers = {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    // context:({context})=>{
-    //   if(context.clientContext.user){
-    //     return {user:context.clientContext.user.sub};
+    context:({context})=>{
+      if(context.clientContext.user){
+        return {user:context.clientContext.user.sub};
     
-    //   }
-    //   else {
-    //     return {};
-    //   }
-    // },
+      }
+      else {
+        return {};
+      }
+    },
     playground:true,
     introspection:true,
   });

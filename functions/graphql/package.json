@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server-lambda": "^3.10.0",
+    "gatsby": "^4.19.1",
     "graphql": "^16.5.0"
   }
 }
