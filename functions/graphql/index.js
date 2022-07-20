@@ -43,7 +43,7 @@ const resolvers = {
   
   },
   Mutation:{
-    addTodo:(_,{text},{user})=>{
+    addTodo:async (_,{text},{user})=>{
       if(!user){
         throw new Error("Must be authenticated");
       }
@@ -63,7 +63,7 @@ const resolvers = {
 
     },
 
-  updateTodoDone:(_,{id})=>{
+  updateTodoDone:async(_,{id})=>{
  
     if(!user){
       throw new Error("Must be authenticated");
