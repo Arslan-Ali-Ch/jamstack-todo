@@ -20,7 +20,7 @@ const typeDefs = gql`
    }
   `;
   const todos={};
-var todoIndex=0;
+var setDone=false;
 const resolvers = {
   Query: {
     todos:async (parent,args,{user})=>{
@@ -51,7 +51,7 @@ const resolvers = {
         q.Create(q.Collection("todos"),{
           data:{
             text,
-            done:false,
+            done:setDone,
             owner:user
           }
         })
@@ -63,14 +63,14 @@ const resolvers = {
 
     },
 
-  updateTodoDone:async(_,{id})=>{
+  updateTodoDone:async(_,{id},{user})=>{
  
     if(!user){
       throw new Error("Must be authenticated");
     }
     const results=await client.query(
       q.Update(q.Ref(q.Collection("todos"),id),{
-        data:{done:true
+        data:{done:!setDone
         }
       })
     );
