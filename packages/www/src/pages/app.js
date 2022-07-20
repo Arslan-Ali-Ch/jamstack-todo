@@ -105,7 +105,7 @@ const Dash=()=>{
                 <ul sx={{listStyleType:'none'}}>
                 {data.todos.map((todo)=>(
                     <Flex key={todo.id} as="li" onClick={async()=>{
-                       await updateTodoDone({variables:{id:todo.id,done:done}})
+                       await updateTodoDone({variables:{id:todo.id,done:todo.done}})
                         await refetch();
                         setDone((prev)=>!prev);
                     }}>

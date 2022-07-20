@@ -71,7 +71,7 @@ const resolvers = {
     // }
     const results=await client.query(
       q.Update(q.Ref(q.Collection("todos"),id),{
-        data:{done:done
+        data:{done:!done
         }
       })
     );
