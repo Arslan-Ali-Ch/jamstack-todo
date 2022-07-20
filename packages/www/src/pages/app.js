@@ -109,7 +109,7 @@ const Dash=()=>{
                         await refetch();
                         setDone((prev)=>!prev);
                     }}>
-                        <Checkbox onChange={()=>{}} checked={todo.done}/>
+                        <Checkbox onChange={()=>{}} checked={todo.done?true:false}/>
                         <span>{todo.text}</span>
                     </Flex>
                 ))}
