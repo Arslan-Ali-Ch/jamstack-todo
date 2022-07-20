@@ -63,7 +63,7 @@ const resolvers = {
 
     },
 
-  updateTodoDone:async(_,{id},{user},{done})=>{
+  updateTodoDone:async(_,{id,done},{user})=>{
     
  
     if(!user){
