@@ -8,11 +8,15 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"netlify-lambda serve functions",
-    "build":"netlify-lambda build functions"
+    "start": "netlify-lambda serve functions",
+    "build": "netlify-lambda build functions"
   },
   "keywords": [],
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "faunadb": "^4.6.0"
+  }
 }
